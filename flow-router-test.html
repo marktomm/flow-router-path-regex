@@ -1,0 +1,46 @@
+<head>
+  <title>flow-router-test</title>
+</head>
+
+<body id="__blaze-root">
+</body>
+
+<template name="layout">
+  <h1>Welcome to Meteor!</h1>
+  
+  <ul>
+    <li><a href="" class="lang">en</a></li>
+    <li><a href="" class="lang">ru</a></li>
+    <br>
+    <li><a class="{{isActiveRoute name='indexPage'}}" href="{{pathFor route='indexPage' locale=lang}}">{{_ 'mainNav.home'}}</a></li>
+    <li><a class="{{isActiveRoute name='countries'}}" href="{{pathFor route='countries' locale=lang}}">{{_ 'mainNav.countries'}}</a></li>
+    <li><a class="{{isActiveRoute name='contact'}}" href="{{pathFor route='contact'}}">{{_ 'mainNav.contact'}}</a></li>
+  </ul>
+  
+  {{> Template.dynamic template=main}}
+</template>
+
+<template name="hello">
+  <h3>{{_ 'tr1'}}</h3>
+</template>
+
+<template name="countries">
+  <h3>{{_ 'mainNav.countries'}}</h3>
+  
+  <ul>
+    <li><a href="{{pathFor route='countries.poland'}}">{{_ 'countries.poland'}}</a></li>
+    <li><a href="{{pathFor route='countries.latvia'}}">{{_ 'countries.latvia'}}</a></li>
+  </ul>
+</template>
+
+<template name="contact">
+  <h3>{{_ 'mainNav.contact'}}</h3>
+</template>
+
+<template name="poland">
+  <h3>{{_ 'countries.poland'}}</h3>
+</template>
+
+<template name="latvia">
+  <h3>{{_ 'countries.latvia'}}</h3>
+</template>

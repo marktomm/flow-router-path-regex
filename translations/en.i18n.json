@@ -1,0 +1,14 @@
+{
+  "tr1": "tr1",
+  
+  "mainNav" : {
+    "home": "home",
+    "countries": "countries",
+    "contact": "contact"
+  },
+  
+  "countries": {
+    "poland": "poland",
+    "latvia": "latvia"
+  }
+}
