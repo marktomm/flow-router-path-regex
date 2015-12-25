@@ -12,7 +12,7 @@ if (Meteor.isClient) {
       var lang = TAPi18n.getLanguage();
       var locale = FlowRouter.current().route.group && FlowRouter.current().route.group.name;
       
-      if(locale != lang)
+      if(locale && locale != lang)
         FlowRouter.go(FlowRouter.current().route.name, {locale: lang}, FlowRouter.current().queryParams);
     });
   });
