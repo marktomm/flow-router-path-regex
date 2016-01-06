@@ -1,4 +1,7 @@
 if (Meteor.isClient) {
+  ClientDebugger.debugMode = true;
+  Session.set('debug_template', '*' );
+  
   Meteor.startup(function () {
     Tracker.autorun(function(){ 
       FlowRouter.watchPathChange();
@@ -30,11 +33,6 @@ if (Meteor.isClient) {
        TAPi18n.setLanguage(event.target.innerText);
     } 
   }); 
-}
-
-if (Meteor.isServer) {
-  Meteor.startup(function () {
-  });
 }
 
 
