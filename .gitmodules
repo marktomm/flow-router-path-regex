@@ -1,3 +1,4 @@
 [submodule "flowRouter"]
 	path = packages/flow-router
 	url = git@github.com:marktomm/flow-router.git
+  branch = test
