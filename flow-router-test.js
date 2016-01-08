@@ -10,67 +10,46 @@ if (Meteor.isClient) {
         console.log('FlowRouter: ', FlowRouter.current().route.name); 
       } catch( e ) { console.log('throw'); };
     });
-    
-    Tracker.autorun(function(){ 
-      var lang = TAPi18n.getLanguage();
-      var locale = FlowRouter.current().route.group && FlowRouter.current().route.group.name;
-      
-      if(locale && locale != lang)
-        FlowRouter.go(FlowRouter.current().route.name, {locale: lang}, FlowRouter.current().queryParams);
-    });
   });
-  
-  //Global template helpers
-  Template.registerHelper('lang', function(argument){
-    return TAPi18n.getLanguage();
-  });
-  
-  
-  
-  Template.layout.events({ 
-    'click .lang': function(event, template){ 
-       event.preventDefault();
-       TAPi18n.setLanguage(event.target.innerText);
-    } 
-  }); 
 }
 
 
 /* *** ROUTE STUFF *** */
 
-var langRoutes = FlowRouter.group({
+var someGroup = FlowRouter.group({
   triggersEnter: [function(context, redirect) {
-    var locale = context.params.locale;
-    var currLang = TAPi18n.getLanguage();
+    console.log('context: ', context);
     
-    if( /^en|ru$/.test(locale) ) {
-      if(currLang != locale) {
-        TAPi18n.setLanguage(locale);
-      }
-    } else {
-      console.log('langRoutes triggersEnter reditect');
-      redirect('/' + currLang + context.path);
+    if('/countries/poland' == context.path) {
+      redirect('/');
     }
+    
+    // if( /^en|ru$/.test(locale) ) {
+    //   ;
+    // } else {
+    //   console.log('someGroup triggersEnter reditect');
+    //   redirect('/');
+    // }
   }],
-  prefix: '/:locale?',
-  name: 'langRoutes'
+  // prefix: '/',
+  name: 'someGroup'
 });
 
-langRoutes.route('/', {
+someGroup.route('/', {
   action: function(params, queryParams) {
     BlazeLayout.render('layout', {main: 'hello'});
   },
   name: 'indexPage'
 });
 
-langRoutes.route('/contact', {
+someGroup.route('/contact', {
   action: function(params, queryParams) {
     BlazeLayout.render('layout', {main: 'contact'});
   },
   name: 'contact'
 });
 
-var countriesGroup = langRoutes.group({
+var countriesGroup = someGroup.group({
   prefix: '/countries',
   name: 'countriesGroup'
 });
@@ -82,8 +61,12 @@ countriesGroup.route('/', {
   name: 'countries'
 });
 
-countriesGroup.route('/poland', {
+FlowRouter.route('/poland', {
   action:function(params, queryParams) {
+    this.group = this.group || {};
+    this.group.name = 'countries';
+    this.group.callSubscriptions = function() {return;};
+    
     BlazeLayout.render('layout', {main: 'poland'});
   },
   name: 'countries.poland'
