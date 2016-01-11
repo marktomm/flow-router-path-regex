@@ -14,7 +14,7 @@
     <br>
     <li><a class="{{isActiveRoute name='indexPage'}}" href="{{pathFor route='indexPage' locale=lang}}">{{_ 'mainNav.home'}}</a></li>
     <li><a class="{{isActiveRoute name='countries'}}" href="{{pathFor route='countries' locale=lang}}">{{_ 'mainNav.countries'}}</a></li>
-    <li><a class="{{isActiveRoute name='contact'}}" href="{{pathFor route='contact'}}">{{_ 'mainNav.contact'}}</a></li>
+    <li><a class="{{isActiveRoute name='contact'}}" href="{{pathFor route='contact' locale=lang}}">{{_ 'mainNav.contact'}}</a></li>
   </ul>
   
   {{> Template.dynamic template=main}}

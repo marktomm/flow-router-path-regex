@@ -1,6 +1,6 @@
 if (Meteor.isClient) {
-  ClientDebugger.debugMode = true;
-  Session.set('debug_template', '*' );
+  // ClientDebugger.debugMode = true;
+  // Session.set('debug_template', '*' );
   
   Meteor.startup(function () {
     Tracker.autorun(function(){ 
@@ -37,6 +37,16 @@ if (Meteor.isClient) {
 
 
 /* *** ROUTE STUFF *** */
+
+FlowRouter.triggers.enter([function(c, redirect) {
+  console.log('context[ ', 
+              'route.name: ', c.route.name, 
+              ' params.locale: ', c.params.locale, 
+              ' oldRoute.name: ', c.oldRoute && c.oldRoute.name , 
+              ' route.group.name: ', c.route.group && c.route.group.name, 
+              ' route.group.parent.name: ', c.route.group && c.route.group.parent && c.route.group.parent.name, 
+              ' ]');
+}]);
 
 var langRoutes = FlowRouter.group({
   triggersEnter: [function(context, redirect) {
